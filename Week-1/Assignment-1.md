@@ -1,4 +1,4 @@
-### Code Deployed
+## Deployed Code
 
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
@@ -31,7 +31,8 @@ contract HelloWorld {
         owner = newOwner;
     }
 }
-```
+```  
+---
 
 ### Svart Galla - HSWW8s  
 ---  
@@ -48,3 +49,18 @@ Fail with error 'Caller is not the owner', execution reverted
 https://sepolia.etherscan.io/tx/0xe4c576d0f2ae86a727f75c0e1bdd3aef646ec882f437cc40077b06b5351ad4d5  
 Fail with error 'Caller is not the owner', execution reverted  
 
+### CryptoWin - GMm8Id  
+---  
+- **Contract Deployment:**  
+https://sepolia.etherscan.io/tx/0x08e0e0e009541509ec00b363b80e4a09318e4a584cf1981de09d38e5497f0d09  
+- ***Set Text* Method Call** - *Successful* **:**  
+https://sepolia.etherscan.io/tx/0x57e259b6243a5acdac3fe53a6d9145dfa8db5337e1d32d4e6976efd3da5d27cd  
+
+### Taufik - JH2nHs  
+---  
+- **Contract Deployment:**  
+https://sepolia.etherscan.io/tx/0xaece716d157f0ae678da3f6a1f6a4549d2edd949b031276b99b9f3daa1491d74  
+- ***Set Text* Method Call** - *Successful* **:**  
+https://sepolia.etherscan.io/tx/0x9c0fcd1d425c5dec7b97f37913ee004be1bee2118331b137a0eccf16c96d3fc4  
+- ***Transfer Ownership* Method Call** - *Successful* **:**
+https://sepolia.etherscan.io/tx/0xd44430535870cce964558d3756bb363896e6bbaec2b6f5e8eabb2d0e2b307631  
