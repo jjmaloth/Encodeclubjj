@@ -54,7 +54,10 @@ Fail with error 'Caller is not the owner', execution reverted
 - **Contract Deployment:**  
 https://sepolia.etherscan.io/tx/0x08e0e0e009541509ec00b363b80e4a09318e4a584cf1981de09d38e5497f0d09  
 - ***Set Text* Method Call** - *Successful* **:**  
-https://sepolia.etherscan.io/tx/0x57e259b6243a5acdac3fe53a6d9145dfa8db5337e1d32d4e6976efd3da5d27cd  
+https://sepolia.etherscan.io/tx/0x57e259b6243a5acdac3fe53a6d9145dfa8db5337e1d32d4e6976efd3da5d27cd
+ ***Transfer Ownership* Method Call** - *Successful* **:**
+  https://sepolia.etherscan.io/tx/0xa685bf3a50134b8834e0d81204ff2b1fb53065ee01b21250f78e48d3115d223c
+  
 
 ### Taufik - JH2nHs  
 ---  
