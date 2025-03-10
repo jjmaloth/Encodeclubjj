@@ -52,9 +52,19 @@ Fail with error 'Caller is not the owner', execution reverted
 ### CryptoWin - GMm8Id  
 ---  
 - **Contract Deployment:**  
-https://sepolia.etherscan.io/tx/0x08e0e0e009541509ec00b363b80e4a09318e4a584cf1981de09d38e5497f0d09  
+https://sepolia.etherscan.io/tx/0x50d5c76bc42e03ba7f770372b494bf356834f12dcd73daa024fc967dd0c791ec  
 - ***Set Text* Method Call** - *Successful* **:**  
-https://sepolia.etherscan.io/tx/0x57e259b6243a5acdac3fe53a6d9145dfa8db5337e1d32d4e6976efd3da5d27cd  
+https://sepolia.etherscan.io/tx/0xbc28796c6c3e338db05d6b9d35290c7254fb131ac6864e21b3faaaacb9e18593  
+- ***Transfer Ownership* Method Call** - *Successful* **:**  
+https://sepolia.etherscan.io/tx/0xa685bf3a50134b8834e0d81204ff2b1fb53065ee01b21250f78e48d3115d223c  
+- ***Set Text* Method Call** - *Failed* **:**  
+https://sepolia.etherscan.io/tx/0x5429353c848710476cc3bbbb2a08d18d218544c88264d568b9dc85f05c71270f  
+Fail with error 'Caller is not the owner', execution reverted  
+- ***Transfer Ownership* Method Call** - *Failed* **:**  
+https://sepolia.etherscan.io/tx/0x0f03a40a92618d5320c7443552646c49de6dd3a94e063bc2dfb0f6c4f2ed18e2  
+Fail with error 'Caller is not the owner', execution reverted  
+- ***Transfer Ownership* Method Call** - *Successful* **:**  
+https://sepolia.etherscan.io/tx/0xa736109ca116b2e00ef045abc5ff4ce5858f42f67b7d8748ae59c0e061a9a123  
 
 ### Taufik - JH2nHs  
 ---  
