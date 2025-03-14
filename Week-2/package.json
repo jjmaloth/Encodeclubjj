@@ -1,0 +1,33 @@
+{
+  "name": "ballot",
+  "version": "1.0.0",
+  "description": "Implementention of a Smart Contract for voting written in Solidity. Ensuring that vote counting is automatic and completely transparent at the same time/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tsar-Odragde/EVM-Bootcamp-Q1-G7.git"
+  },
+  "keywords": [
+    "Solidity",
+    "TDD",
+    "TypeScript",
+    "Hardhat",
+    "Smart-Contracts",
+    "EVM",
+    "Web3",
+    "Blockchain"
+  ],
+  "author": "Tsar-Odragde, jjmaloth, TAUFIQ HIDAYAH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tsar-Odragde/EVM-Bootcamp-Q1-G7/issues"
+  },
+  "homepage": "https://github.com/Tsar-Odragde/EVM-Bootcamp-Q1-G7#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "hardhat": "^2.22.19"
+  }
+}
