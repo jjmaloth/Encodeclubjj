@@ -10,8 +10,6 @@ const voterPrivateKey = process.env.PRIVATE_KEY || "";
 
 const network = "sepolia";
 
-const transport = http(`https://eth-${network}.g.alchemy.com/v2/${providerApiKey}`);
-
 async function main() {
     const parameters = process.argv.slice(2);
     if (!parameters || parameters.length < 1)
@@ -27,14 +25,14 @@ async function main() {
 
     const publicClient = createPublicClient({
         chain: sepolia,
-        transport,
+        transport: http(`https://eth-${network}.g.alchemy.com/v2/${providerApiKey}`),
     });
 
     const account = privateKeyToAccount(`0x${voterPrivateKey}`);
     const voter = createWalletClient({
         account,
         chain: sepolia,
-        transport,
+        transport: http(`https://eth-${network}.g.alchemy.com/v2/${providerApiKey}`),
     });
 
     console.log("Proposal selected: ");
@@ -48,22 +46,23 @@ async function main() {
     console.log("Voting to proposal", name);
     console.log("Confirm? (Y/n)");
 
-    process.stdin.addListener("data", async function (data: Buffer) {
-        if (data.toString().trim().toLowerCase() != "n") {
-            const hash = await voter.writeContract({
-                address: contractAddress,
-                abi,
-                functionName: "vote",
-                args: [BigInt(proposalIndex)],
-            });
-            console.log("Transaction hash:", hash);
-            console.log("Waiting for confirmations...");
-            const receipt = await publicClient.waitForTransactionReceipt({ hash });
-            console.log("Transaction confirmed");
-        } else {
-            console.log("Operation cancelled");
-        }
-        process.exit();
+    const stdin = process.stdin;
+    stdin.addListener("data", async function (d: Buffer) {
+      if (d.toString().trim().toLowerCase() != "n") {
+        const hash = await voter.writeContract({
+          address: contractAddress,
+          abi,
+          functionName: "vote",
+          args: [BigInt(proposalIndex)],
+        });
+        console.log("Transaction hash:", hash);
+        console.log("Waiting for confirmations...");
+        const receipt = await publicClient.waitForTransactionReceipt({ hash });
+        console.log("Transaction confirmed");
+      } else {
+        console.log("Operation cancelled");
+      }
+      process.exit();
     });
 }
 
