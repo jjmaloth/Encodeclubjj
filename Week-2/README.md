@@ -100,9 +100,19 @@ https://sepolia.etherscan.io/tx/0x7da446b5e6b9826bada169d4da3ff6cb61d30d31dfeef3
 Fetch Results:
 
 npx ts-node --files ./scripts/FetchResults.ts <contractAddress>
+
+
+
+
+
+
 **Contributors**
 Tsar-Odragde - HSWW8s
 jjmaloth - GMm8Id
 TAUFIQ HIDAYAH - JH2nHs
+
+
+
+
 **License**
 This project is open source and available under the MIT License.
