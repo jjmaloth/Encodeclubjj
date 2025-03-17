@@ -1,126 +1,108 @@
-#Deployed Contract
+**EVM Bootcamp Q1 - Week 2 Group Project**
+This repository contains the deliverable for a group activity as part of the EVM Bootcamp Q1. The project focuses on developing scripts to interact with the provided Solidity smart contract Ballot.sol.
 
+The main goal is to manage voting functionalities, including giving voting rights, casting votes, delegating votes, and querying voting results. Each execution is documented with transaction hashes for successful transactions or revert reasons for failed ones.
 
+**Project Requirements**
+Develop and execute scripts for Ballot.sol to perform:
 
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
-contract HelloWorld {
-    string private text;
-    address public owner;
+ Granting voting rights
+ Casting votes
+ Delegating votes
+ Querying voting results
+Document each function execution clearly, noting:
 
-    modifier onlyOwner()
-    {
-        require (msg.sender == owner, "Caller is not the owner");
-        _;
-    }
+ Transaction hashes for successful operations
+ Revert reasons for any failed transactions
+ Submit the final report through the provided form in Discord.
 
-    constructor() {
-        text = "Hello World";
-        owner = msg.sender;
-    }
+ Ensure the code is uploaded to a GitHub repository and linked appropriately.
 
-    function helloWorld() public view returns (string memory) {
-        return text;
-    }
+**Project Structure**
+Week-2/
+├── contracts/
+│   └── Ballot.sol
+├── scripts/
+│   ├── DeployWithHardhat.ts
+│   ├── DeployWithViem.ts
+│   ├── VotingRights.ts
+│   ├── CastVote.ts
+│   └── FetchResults.ts
+├── test/
+│   └── Ballot.ts
+├── package.json
+└── .env
+└── hardhat.config.ts
+**Setup Instructions**
+Clone the repository:
+git clone https://github.com/Tsar-Odragde/EVM-Bootcamp-Q1-G7.git
+cd EVM-Bootcamp-Q1-G7/Week-2
+Install dependencies:
+npm install
+Configure Environment Variables:
+Create a .env file in the Week-2 directory containing:
 
-    function setText(string calldata newText) public onlyOwner {
-        text = newText;
-    }
-    
-    function transferOwnership(address newOwner) public onlyOwner {
-        owner = newOwner;
-    }
-}
+ALCHEMY_API_KEY=your_alchemy_api_key
+PRIVATE_KEY=your_wallet_private_key
+Using the Scripts
+Deploy Ballot Contract
+Deploy your contract with specified proposal names:
 
-#Deployed Script
+npx ts-node --files ./scripts/DeployWithHardhat.ts Proposal1 Proposal2 Proposal3
+Give Voting Rights
+Grant voting rights to an address:
 
+npx ts-node --files ./scripts/VotingRights.ts <contractAddress> <voterAddress> giveRightToVote
+Cast Vote
+Vote for a specific proposal index:
 
-import { viem } from "hardhat";
-import { toHex, hexToString } from "viem";
+npx ts-node --files ./scripts/CastVote.ts <contractAddress> <proposalIndex>
+Delegate Vote
+Delegate your voting power to another voter:
 
-const PROPOSALS = ["Proposal 1", "Proposal 2", "Proposal 3"];
+npx ts-node --files ./scripts/DelegateVote.ts <contractAddress> <delegateAddress>
+Fetch Voting Results
+Retrieve the current ballot results, including the winner:
 
-async function main() {
-    try {
-        console.log("Starting deployment process...");
-        
-        console.log("Initial Proposals: ");
-        PROPOSALS.forEach((element, index) => {
-          console.log(`Proposal N. ${index + 1}: ${element}`);
-        });
-        
-        console.log("\nGetting deployment wallet...");
-        const publicClient = await viem.getPublicClient();
-        const [deployer] = await viem.getWalletClients();
-        console.log("Deploying from address:", deployer.account.address);
-        
-        console.log("\nDeploying Ballot contract...");
-        const contract = await viem.deployContract("Ballot", [
-          PROPOSALS.map((prop) => toHex(prop, { size: 32 }))
-        ]);
-        
-        console.log("\nDeployment Transaction Details:");
-        console.log("Contract Address:", contract.address);
-        
-        // Check if deployer is chairperson
-        const chairperson = await contract.read.chairperson();
-        console.log("\nChairperson address:", chairperson);
-        
-        // Display initial vote counts
-        console.log("\nInitial Vote Counts:");
-        for (let index = 0; index < PROPOSALS.length; index++) {
-          const proposal = await contract.read.proposals([BigInt(index)]);
-          const name = hexToString(proposal[0], { size: 32 });
-          const voteCount = proposal[1];  // voteCount is the second element in the proposal struct
-          console.log(`${name}: ${voteCount} vote(s)`);
-        }
-        
-        // Vote for proposal 1 (the deployer is automatically given voting rights as chairperson)
-        console.log("\nVoting for Proposal 1...");
-        await contract.write.vote([BigInt(0)]);  // 0 is the index for Proposal 1
-        console.log("Vote cast for Proposal 1");
-        
-        // Display updated vote counts
-        console.log("\nUpdated Vote Counts:");
-        for (let index = 0; index < PROPOSALS.length; index++) {
-          const proposal = await contract.read.proposals([BigInt(index)]);
-          const name = hexToString(proposal[0], { size: 32 });
-          const voteCount = proposal[1];
-          console.log(`${name}: ${voteCount} vote(s)`);
-        }
-        
-        // Display winning proposal
-        const winningProposal = await contract.read.winningProposal();
-        const winnerName = await contract.read.winnerName();
-        console.log("\nWinning Proposal:", hexToString(winnerName, { size: 32 }));
-        
-    } catch (error) {
-        console.error("Operation failed:", error);
-        throw error;
-    }
-}
+npx ts-node --files ./scripts/FetchResults.ts <contractAddress>
+Technologies Used
+Solidity - Smart contract programming language
+TypeScript - Scripting for smart contract interaction
+Viem - Ethereum client library for script execution
+Hardhat - Ethereum development environment for smart contracts
+Alchemy - RPC API for Ethereum blockchain data
+Reporting & Submission
+**Contract Deployment:**
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+https://sepolia.etherscan.io/tx/0x0b1e1e8b14c30fa61fdab47714df1b865d0a484bc32a4158d4c09ae4581213c3
+https://sepolia.etherscan.io/tx/0xc9f5ca2211818844b23b94334d98d8bd29625ff742479e96cef64568c29d3db8
+https://sepolia.etherscan.io/tx/0xc753f0a3b73de0644c40645ea48170d50e9ddb54fe4c6fb31a428ae674820fd7
+Give Voting Rights:
 
-**Taufik - JH2nHs**
-Created the smart contract for Vote TRX 0x037366a1b364b48917e58f1b038c6c0dc8d4fc4f to vote
+https://sepolia.etherscan.io/tx/0xf9b387a30f2974ebb4f8e0c39a2d9400c8f98e326f7271a8ea149bb61bca9e4b
+https://sepolia.etherscan.io/tx/0x33953f3f91696b050429544723a2f28add89181ed2e50fb7a3047c66aefac146
+https://sepolia.etherscan.io/tx/0xeae471575f5c096600ddcccc9ac197c6e97cf8677b17d87e48142db4b5f94ab3
+https://sepolia.etherscan.io/tx/0xf1d6f2f981babb95b06e7d798eb4cbaf4f2d66eeae1e409b75c4ff17c4002bac
+https://sepolia.etherscan.io/tx/0xcca982e14cae27e8067e1e74740afdd3861aadc2348e9f57dd1411bf6e30b419
+Cast Vote:
 
-**Svart Galla - HSWW8s**
-Interacted with Contract 0x037366a1b364b48917e58f1b038c6c0dc8d4fc4f and voting rights implemented
+https://sepolia.etherscan.io/tx/0x19fb927df52c1df71151d4b9f10472af35cff8196d22e812e3f55654bb990f65
+https://sepolia.etherscan.io/tx/0x0884b7eaff25e94b9e7851c11d13a963dd6a510de2106096f7018db78240febf
+https://sepolia.etherscan.io/tx/0xa39c9b09282d9105ea60424886298b6508a64fbc1c2043d62bd507fd482ee6c6
+https://sepolia.etherscan.io/tx/0xa4265fa9a67d7c6fc36ad57ba9a3e3f5e5e14a43d386a0629542eb7220407ac1
+https://sepolia.etherscan.io/tx/0xc775b3d39afd56a4ae66d4b91cc9b7000b28c1c253159293d5985c0b5d9016bc
+Delegate Vote:
 
-**CryptoWin - GMm8Id**
-1.	https://sepolia.etherscan.io/address/0x317f14ff4b06f92abe9c1a16f1b3177c4c1ebc7d
-2.	Deployed the contract to address: 0x317f14ff4b06f92abe9c1a16f1b3177c4c1ebc7d
-2.	Confirmed the deployer (0x475Eed7198DAa36E46936095EFaf8417AA6F0242) is the chairperson
-3.	Showed initial vote counts (all 0)
-4.	Cast a vote for Proposal 1
-5.	Showed updated vote counts
-6.	Displayed the winning proposal
+https://sepolia.etherscan.io/tx/0x75822b2836507f661d1a21eee7ae0d0a7394377cfbfc1ef70c1c57a59a4fa88a - Successful
+Failed due to delegatee account do not possesing voting rights:
+https://sepolia.etherscan.io/tx/0xc7bbf0eef9e5f432b783d882de240a1cb94143be25df4b0b95a17b6bb593150e
+https://sepolia.etherscan.io/tx/0x7da446b5e6b9826bada169d4da3ff6cb61d30d31dfeef3cd97412a47297d3cd0
+Fetch Results:
 
-
-
-
-
+npx ts-node --files ./scripts/FetchResults.ts <contractAddress>
+**Contributors**
+Tsar-Odragde - HSWW8s
+jjmaloth - GMm8Id
+TAUFIQ HIDAYAH - JH2nHs
+**License**
+This project is open source and available under the MIT License.
